@@ -1,7 +1,7 @@
-Types::QueryType = GraphQL::ObjectType.define do
-  name 'Query'
+module Types
+  class QueryType < GraphQL::Schema::Object
+    field :categories_working, [Types::CategoryType], function: Resolvers::CategorySearch
 
-  connection :categories, Types::CategoryType.connection_type, function: Resolvers::CategorySearch
-
-  connection :posts, Types::PostType.connection_type, function: Resolvers::PostSearch
+    field :categories_not_working, Types::CategoryType.connection_type, function: Resolvers::CategorySearch
+  end
 end
